@@ -34,17 +34,14 @@ public class Page {
 
 	// Function2: Inserting a record into the page
 	public boolean insert(String[] val) {
-		for(int i=0 ; i <200;i++){
-			System.out.println(Arrays.toString(data[i]));
-		}
+
 		if (!isFull()) {
-	
+			insertCSV(val);
 			for (int i = 0; i < val.length; i++)
 				data[current][i] = val[i];
-			insertCSV(val);
-			current++;
-		} else
-			return false;
+				current++;
+				} else
+					return false;
 
 		return true;
 
@@ -52,24 +49,22 @@ public class Page {
 
 	public void insertCSV(String[] val) {
 		try {
-			
+
 			FileWriter writer = new FileWriter(path);
-			String newline ;
-			System.out.println("in");
-		
-			 for(int i=0 ; i<current;i++){
-				 for(int j =0 ;j<data[i].length;j++){
-					 writer.append(data[i][j]);
-					 writer.append(j == data[i].length - 1 ? "\n" : ",");
-				 }
-			 }
-			        
-			    
+			String newline;
+
+			for (int i = 0; i < current; i++) {
+				for (int j = 0; j < data[i].length; j++) {
+					writer.append(data[i][j]);
+					writer.append(j == data[i].length - 1 ? "\n" : ",");
+				}
+			} // old values insertion ; 
+
 			for (int i = 0; i < val.length; i++) {
 				writer.append(val[i]);
 				writer.append(i == val.length - 1 ? "\n" : ",");
 
-			}
+			}	 // new values insertion ; 
 			writer.flush();
 			writer.close();
 		} catch (Exception e) {
